@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/vaibh/Desktop/blog-app/src/app/dashboard/dashboard.module.css"],"sourcesContent":[".wrap { max-width:900px; margin:2rem auto; }\r\n.header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem }\r\n.title { font-size:1.5rem; color:var(--text-color) }\r\n.btn { padding:0.5rem 0.9rem; background:var(--primary-color); color:white; border:none; border-radius:6px; cursor:pointer }\r\n.grid { display:grid; gap:1rem }\r\n.card { background:var(--card-bg); padding:1rem; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.04); }\r\n.meta { color:var(--text-color); opacity:0.8; font-size:0.9rem }\r\n.actions { margin-top:0.75rem; display:flex; gap:0.5rem }\r\n.link { color:var(--primary-color); text-decoration:none }\r\n.empty { text-align:center; padding:2rem }\r\n"],"names":[],"mappings":"AAAA;;;;;AACA;;;;;;;AACA;;;;;AACA;;;;;;;;;AACA;;;;;AACA;;;;;;;AACA;;;;;;AACA;;;;;;AACA;;;;;AACA","debugId":null}}]
+}

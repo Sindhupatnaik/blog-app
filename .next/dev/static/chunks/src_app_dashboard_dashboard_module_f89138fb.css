@@ -1,0 +1,62 @@
+/* [project]/src/app/dashboard/dashboard.module.css [app-client] (css) */
+.dashboard-module__XABe8G__wrap {
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.dashboard-module__XABe8G__header {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+.dashboard-module__XABe8G__title {
+  color: var(--text-color);
+  font-size: 1.5rem;
+}
+
+.dashboard-module__XABe8G__btn {
+  background: var(--primary-color);
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  padding: .5rem .9rem;
+}
+
+.dashboard-module__XABe8G__grid {
+  gap: 1rem;
+  display: grid;
+}
+
+.dashboard-module__XABe8G__card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px #0000000a;
+}
+
+.dashboard-module__XABe8G__meta {
+  color: var(--text-color);
+  opacity: .8;
+  font-size: .9rem;
+}
+
+.dashboard-module__XABe8G__actions {
+  gap: .5rem;
+  margin-top: .75rem;
+  display: flex;
+}
+
+.dashboard-module__XABe8G__link {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.dashboard-module__XABe8G__empty {
+  text-align: center;
+  padding: 2rem;
+}
+
+/*# sourceMappingURL=src_app_dashboard_dashboard_module_f89138fb.css.map*/

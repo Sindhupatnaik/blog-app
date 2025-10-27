@@ -1,0 +1,10 @@
+.wrap { max-width:900px; margin:2rem auto; }
+.header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem }
+.title { font-size:1.5rem; color:var(--text-color) }
+.btn { padding:0.5rem 0.9rem; background:var(--primary-color); color:white; border:none; border-radius:6px; cursor:pointer }
+.grid { display:grid; gap:1rem }
+.card { background:var(--card-bg); padding:1rem; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.04); }
+.meta { color:var(--text-color); opacity:0.8; font-size:0.9rem }
+.actions { margin-top:0.75rem; display:flex; gap:0.5rem }
+.link { color:var(--primary-color); text-decoration:none }
+.empty { text-align:center; padding:2rem }

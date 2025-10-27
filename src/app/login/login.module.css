@@ -1,0 +1,41 @@
+.container {
+  max-width: 480px;
+  margin: 3rem auto;
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+.title {
+  margin-bottom: 1.25rem;
+  font-size: 1.4rem;
+  text-align: center;
+  color: var(--text-color);
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.input {
+  padding: 0.65rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+.button {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.meta {
+  text-align: center;
+  margin-top: 1rem;
+}
+.error { color: var(--error-color); text-align:center; }
+.success { color: var(--success-color); text-align:center; }

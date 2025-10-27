@@ -1,0 +1,209 @@
+[00:00:04.134] Server  WARN     ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:05.470] Server  LOG      ✓ Ready in 4.2s
+[00:06:54.048] Server  LOG      ○ Compiling / ...
+[00:07:00.527] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:33.230] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:44.692] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:44.924] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <ScrollAndFocusHandler segmentPath={[...]}>
+      <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+        <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+          <LoadingBoundary name="signup/" loading={null}>
+            <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <InnerLayoutRouter url="/signup" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} ...>
+                    <SegmentViewNode type="page" pagePath="signup/pag...">
+                      <SegmentTrieNode>
+                      <ClientPageRoot Component={function SignupPage} serverProvidedParams={{...}}>
+                        <SignupPage params={Promise} searchParams={Promise}>
+                          <div className="signup-mod...">
+                            <h1>
+                            <form onSubmit={function handleSubmit} className="signup-mod...">
+                              <input
+                                className="signup-module__8Fjwta__input"
+                                type="text"
+                                name="name"
+                                placeholder="Your name"
+                                value=""
+                                onChange={function handleChange}
+                                required={true}
+-                               fdprocessedid="3lvjh"
+                              >
+                              <input
+                                className="signup-module__8Fjwta__input"
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                value=""
+                                onChange={function handleChange}
+                                required={true}
+-                               fdprocessedid="ivpki"
+                              >
+                              <input
+                                className="signup-module__8Fjwta__input"
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                value=""
+                                onChange={function handleChange}
+                                required={true}
+-                               fdprocessedid="0zpzqn"
+                              >
+                              <button
+                                type="submit"
+                                className="signup-module__8Fjwta__button"
+-                               fdprocessedid="4lther"
+                              >
++                               Sign Up
+                    ...
+                  ...
+        ...
+
+[00:12:05.752] Server  ERROR   Error: Route "/" used `cookies().get`. `cookies()` returns a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11846:34)
+    at logDedupedError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11604:25)
+    at Promise.get (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11813:13)
+    at middleware (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\[root-of-the-server]__804968b7._.js:49:208)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:17552:26)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:655)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:325)
+    at async adapter (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7225:16) {
+  
+}
+[00:12:05.916] Server  ERROR    ⨯ TypeError: {imported module ./nodemodules/next/dist/esm/server/request/cookies.js}.cookies(...).get is not a function
+[00:12:08.943] Server  LOG      ○ Compiling /_error ...
+[00:12:09.909] Server  ERROR   Node.js fs rename failed after 101 retries with error Error: EPERM: operation not permitted, rename 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\middleware-build-manifest.js.tmp.5hd16cdsrn8' -> 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\middleware-build-manifest.js'
+[00:12:09.931] Server  ERROR    ⨯ Error: EPERM: operation not permitted, rename 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\middleware-build-manifest.js.tmp.5hd16cdsrn8' -> 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\middleware-build-manifest.js'
+[00:12:10.406] Server  ERROR   Node.js fs rename failed after 101 retries with error Error: EPERM: operation not permitted, rename 'C:\Users\vaibh\Desktop\blog-app\.next\dev\static\development\_buildManifest.js.tmp.lktt4brft7p' -> 'C:\Users\vaibh\Desktop\blog-app\.next\dev\static\development\_buildManifest.js'
+[00:12:10.413] Server  ERROR   Error: EPERM: operation not permitted, rename 'C:\Users\vaibh\Desktop\blog-app\.next\dev\static\development\_buildManifest.js.tmp.lktt4brft7p' -> 'C:\Users\vaibh\Desktop\blog-app\.next\dev\static\development\_buildManifest.js'
+[00:12:10.468] Server  ERROR   Error: Route "/" used `cookies().get`. `cookies()` returns a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11846:34)
+    at logDedupedError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11604:25)
+    at Promise.get (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11813:13)
+    at middleware (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\[root-of-the-server]__804968b7._.js:49:208)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:17552:26)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:655)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:325)
+    at async adapter (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7225:16) {
+  
+}
+[00:12:10.548] Server  ERROR    ⨯ TypeError: {imported module ./nodemodules/next/dist/esm/server/request/cookies.js}.cookies(...).get is not a function
+[00:12:11.661] Server  ERROR   Error: Route "/" used `cookies().get`. `cookies()` returns a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11846:34)
+    at logDedupedError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11604:25)
+    at Promise.get (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11813:13)
+    at middleware (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\[root-of-the-server]__804968b7._.js:49:208)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:17552:26)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:655)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:325)
+    at async adapter (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7225:16) {
+  
+}
+[00:12:11.721] Server  ERROR    ⨯ TypeError: {imported module ./nodemodules/next/dist/esm/server/request/cookies.js}.cookies(...).get is not a function
+[00:12:11.756] Server  ERROR   Error: Route "/" used `cookies().get`. `cookies()` returns a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11846:34)
+    at logDedupedError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11604:25)
+    at Promise.get (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11813:13)
+    at middleware (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\[root-of-the-server]__804968b7._.js:49:208)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:17552:26)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:655)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:325)
+    at async adapter (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7225:16) {
+  
+}
+[00:12:11.792] Server  ERROR    ⨯ TypeError: {imported module ./nodemodules/next/dist/esm/server/request/cookies.js}.cookies(...).get is not a function
+[00:12:12.486] Browser ERROR   uncaughtError: TypeError: {imported module ./nodemodules/next/dist/esm/server/request/cookies.js}.cookies(...).get is not a function
+[00:12:13.494] Server  ERROR   Node.js fs rename failed after 101 retries with error Error: EPERM: operation not permitted, rename 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\server-reference-manifest.js.tmp.iqa1eyym4q' -> 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\server-reference-manifest.js'
+[00:12:14.175] Server  ERROR   Node.js fs rename failed after 101 retries with error Error: EPERM: operation not permitted, rename 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\middleware-build-manifest.js.tmp.5yuqnk73soe' -> 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\middleware-build-manifest.js'
+[00:12:14.620] Server  ERROR   Node.js fs rename failed after 101 retries with error Error: EPERM: operation not permitted, rename 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\next-font-manifest.js.tmp.pv8aknpmm3' -> 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\next-font-manifest.js'
+[00:12:14.648] Server  ERROR   Error: EPERM: operation not permitted, rename 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\next-font-manifest.js.tmp.pv8aknpmm3' -> 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\next-font-manifest.js'
+[00:12:14.677] Server  ERROR    ⨯ "unhandledRejection:" Error: EPERM: operation not permitted, rename 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\next-font-manifest.js.tmp.pv8aknpmm3' -> 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\next-font-manifest.js'
+[00:12:14.697] Server  ERROR    ⨯ "unhandledRejection: " Error: EPERM: operation not permitted, rename 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\next-font-manifest.js.tmp.pv8aknpmm3' -> 'C:\Users\vaibh\Desktop\blog-app\.next\dev\server\next-font-manifest.js'
+[00:12:17.061] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:12:17.192] Server  ERROR   Error: Route "/" used `cookies().get`. `cookies()` returns a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11846:34)
+    at logDedupedError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11604:25)
+    at Promise.get (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11813:13)
+    at middleware (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\[root-of-the-server]__804968b7._.js:49:208)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:17552:26)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:655)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:325)
+    at async adapter (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7225:16) {
+  
+}
+[00:12:17.235] Server  ERROR    ⨯ TypeError: {imported module ./nodemodules/next/dist/esm/server/request/cookies.js}.cookies(...).get is not a function
+[00:12:17.385] Server  ERROR   Error: Route "/" used `cookies().get`. `cookies()` returns a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11846:34)
+    at logDedupedError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11604:25)
+    at Promise.get (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11813:13)
+    at middleware (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\[root-of-the-server]__804968b7._.js:49:208)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:17552:26)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:655)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:325)
+    at async adapter (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7225:16) {
+  
+}
+[00:12:17.432] Server  ERROR    ⨯ TypeError: {imported module ./nodemodules/next/dist/esm/server/request/cookies.js}.cookies(...).get is not a function
+[00:12:25.282] Server  ERROR   Error: Route "/" used `cookies().get`. `cookies()` returns a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11846:34)
+    at logDedupedError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11604:25)
+    at Promise.get (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11813:13)
+    at middleware (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\[root-of-the-server]__804968b7._.js:49:208)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:17552:26)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:655)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:325)
+    at async adapter (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7225:16) {
+  
+}
+[00:12:25.320] Server  ERROR    ⨯ TypeError: {imported module ./nodemodules/next/dist/esm/server/request/cookies.js}.cookies(...).get is not a function
+[00:12:25.444] Server  ERROR   Error: Route "/" used `cookies().get`. `cookies()` returns a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11846:34)
+    at logDedupedError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11604:25)
+    at Promise.get (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11813:13)
+    at middleware (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\[root-of-the-server]__804968b7._.js:49:208)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:17552:26)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:655)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:325)
+    at async adapter (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7225:16) {
+  
+}
+[00:12:25.486] Server  ERROR    ⨯ TypeError: {imported module ./nodemodules/next/dist/esm/server/request/cookies.js}.cookies(...).get is not a function
+[00:12:26.033] Browser ERROR   uncaughtError: TypeError: {imported module ./nodemodules/next/dist/esm/server/request/cookies.js}.cookies(...).get is not a function
+[00:12:28.949] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:12:29.060] Server  ERROR   Error: Route "/" used `cookies().get`. `cookies()` returns a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11846:34)
+    at logDedupedError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11604:25)
+    at Promise.get (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11813:13)
+    at middleware (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\[root-of-the-server]__804968b7._.js:49:208)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:17552:26)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:655)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:325)
+    at async adapter (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7225:16) {
+  
+}
+[00:12:29.124] Server  ERROR    ⨯ TypeError: {imported module ./nodemodules/next/dist/esm/server/request/cookies.js}.cookies(...).get is not a function
+[00:12:29.230] Server  ERROR   Error: Route "/" used `cookies().get`. `cookies()` returns a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11846:34)
+    at logDedupedError (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11604:25)
+    at Promise.get (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:11813:13)
+    at middleware (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\[root-of-the-server]__804968b7._.js:49:208)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:17552:26)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:655)
+    at <unknown> (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7270:325)
+    at async adapter (C:\Users\vaibh\Desktop\blog-app\.next\dev\server\edge\chunks\_730d1ac9._.js:7225:16) {
+  
+}
+[00:12:29.261] Server  ERROR    ⨯ TypeError: {imported module ./nodemodules/next/dist/esm/server/request/cookies.js}.cookies(...).get is not a function

@@ -1,0 +1,4 @@
+.wrap { max-width:800px; margin:2rem auto; background:var(--card-bg); padding:1.5rem; border-radius:8px }
+.title { font-size:1.8rem; margin-bottom:0.5rem; color:var(--text-color) }
+.meta { color:var(--text-color); opacity:0.8; margin-bottom:1rem }
+.content { color:var(--text-color); line-height:1.8; white-space:pre-wrap }
