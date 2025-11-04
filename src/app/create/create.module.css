@@ -2,5 +2,5 @@
 .form { display:flex; flex-direction:column; gap:0.75rem; background:var(--card-bg); padding:1.25rem; border-radius:8px }
 .input { padding:0.75rem; border-radius:6px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-color) }
 .textarea { min-height:300px; padding:1rem; border-radius:6px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-color) }
-.btn { padding:0.6rem 1rem; background:var(--primary-color); color:white; border:none; border-radius:6px; cursor:pointer }
+.btn { padding:0.6rem 1rem; background:var(--text-color); color:var(--card-bg); border:none; border-radius:6px; cursor:pointer }
 .meta { color:var(--text-color); opacity:0.8 }

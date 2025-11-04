@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import styles from './signup.module.css';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '../context/AuthContext';
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ export default function SignupPage() {
   });
   const [message, setMessage] = useState('');
   const router = useRouter();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,9 +28,15 @@ export default function SignupPage() {
 
       const data = await response.json();
       if (response.ok) {
-        setMessage('Signup successful! Redirecting to login...');
+        // auto-login after signup
+        setMessage('Signup successful! Signing you in...');
         setFormData({ name: '', email: '', password: '' });
-        setTimeout(()=>router.push('/login'), 900);
+        // store token and user
+        if (data.token) {
+          login(data.user, data.token);
+          document.cookie = `auth_token=${data.token}; path=/`;
+        }
+        setTimeout(()=>router.push('/dashboard'), 800);
       } else {
         setMessage(data.error || 'Error during signup');
       }

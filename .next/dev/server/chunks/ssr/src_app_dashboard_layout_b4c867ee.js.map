@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/vaibh/Desktop/blog-app/src/app/dashboard/layout.js"],"sourcesContent":["'use client';\r\n\r\nimport '../styles/globals.css';\r\nimport '../styles/components.css';\r\nimport { ThemeProvider } from '../context/ThemeContext';\r\nimport { AuthProvider } from '../context/AuthContext';\r\n\r\nexport default function DashboardLayout({ children }) {\r\n  return (\r\n    \r\n        <ThemeProvider>\r\n          <AuthProvider>\r\n            <main>\r\n              {children}\r\n            </main>\r\n            <footer className=\"footer\">\r\n              <div className=\"container\">\r\n                \r\n              </div>\r\n            </footer>\r\n          </AuthProvider>\r\n        </ThemeProvider>\r\n  );\r\n}"],"names":[],"mappings":";;;;;AAIA;AACA;AALA;;;;;;AAOe,SAAS,gBAAgB,EAAE,QAAQ,EAAE;IAClD,qBAEM,8OAAC,sJAAa;kBACZ,cAAA,8OAAC,oJAAY;;8BACX,8OAAC;8BACE;;;;;;8BAEH,8OAAC;oBAAO,WAAU;8BAChB,cAAA,8OAAC;wBAAI,WAAU;;;;;;;;;;;;;;;;;;;;;;AAO7B","debugId":null}}]
+}

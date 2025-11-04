@@ -1,22 +1,22 @@
 /* [project]/src/app/styles/globals.css [app-client] (css) */
 :root {
-  --primary-color: #1a73e8;
-  --secondary-color: #f8f9fa;
-  --text-color: #202124;
-  --border-color: #dadce0;
-  --error-color: #d93025;
-  --success-color: #0f9d58;
   --bg-color: #fff;
+  --text-color: #000;
+  --primary-color: #000;
+  --muted-color: #666;
+  --border-color: #e5e5e5;
   --card-bg: #fff;
+  --error-color: #b00020;
+  --success-color: #0f9d58;
 }
 
-.dark-mode {
-  --primary-color: #4285f4;
-  --secondary-color: #1f1f1f;
-  --text-color: #e8eaed;
-  --border-color: #5f6368;
-  --bg-color: #121212;
-  --card-bg: #1f1f1f;
+:root[data-theme="dark"] {
+  --bg-color: #0b0b0b;
+  --text-color: #fff;
+  --primary-color: #fff;
+  --muted-color: #9aa6b2;
+  --border-color: #222226;
+  --card-bg: #0f0f0f;
 }
 
 * {
@@ -30,15 +30,15 @@ body {
   background-color: var(--bg-color);
   flex-direction: column;
   min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Arial, Helvetica, sans-serif;
   line-height: 1.6;
-  transition: background-color .3s, color .3s;
+  transition: background-color .2s, color .2s;
   display: flex;
 }
 
 main {
   flex: 1;
-  padding: 2rem 0;
+  padding: 40px 0;
 }
 
 .container {
@@ -48,10 +48,10 @@ main {
 }
 
 header {
-  background-color: #fff;
-  margin-bottom: 2rem;
-  padding: 1rem 0;
-  box-shadow: 0 2px 4px #0000001a;
+  background: var(--card-bg);
+  margin-bottom: 24px;
+  padding: 18px 0;
+  box-shadow: 0 1px 3px #0000000f;
 }
 
 nav {
@@ -66,37 +66,36 @@ nav {
 }
 
 a {
-  color: var(--primary-color);
+  color: var(--text-color);
   text-decoration: none;
-  transition: color .2s;
+  transition: opacity .15s;
 }
 
 a:hover {
-  color: #1557b0;
+  opacity: .85;
 }
 
 button {
-  background-color: var(--primary-color);
-  color: #fff;
+  background: var(--text-color);
+  color: var(--card-bg);
   cursor: pointer;
   border: none;
-  border-radius: 4px;
-  padding: .5rem 1rem;
-  transition: background-color .2s;
+  border-radius: 999px;
+  padding: 8px 14px;
 }
 
 button:hover {
-  background-color: #1557b0;
+  opacity: .9;
 }
 
 button.secondary {
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
   background-color: #0000;
 }
 
 button.secondary:hover {
-  background-color: #f1f5fe;
+  background-color: var(--card-bg);
 }
 
 .error {

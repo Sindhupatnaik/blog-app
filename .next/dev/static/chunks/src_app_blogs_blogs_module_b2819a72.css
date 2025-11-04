@@ -1,0 +1,35 @@
+/* [project]/src/app/blogs/blogs.module.css [app-client] (css) */
+.blogs-module__DEsqIa__wrap {
+  max-width: 1100px;
+  margin: 2rem auto;
+}
+
+.blogs-module__DEsqIa__grid {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  display: grid;
+}
+
+.blogs-module__DEsqIa__card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.blogs-module__DEsqIa__title {
+  color: var(--text-color);
+  font-size: 1.25rem;
+}
+
+.blogs-module__DEsqIa__snippet {
+  color: var(--text-color);
+  opacity: .85;
+}
+
+.blogs-module__DEsqIa__meta {
+  color: var(--text-color);
+  opacity: .7;
+  margin-top: .5rem;
+}
+
+/*# sourceMappingURL=src_app_blogs_blogs_module_b2819a72.css.map*/

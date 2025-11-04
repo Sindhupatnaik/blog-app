@@ -2,7 +2,7 @@
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: white;
+  background-color: var(--card-bg);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -24,6 +24,10 @@
   padding: 0.75rem;
   font-size: 1rem;
   margin-top: 1rem;
+  background: var(--text-color);
+  color: var(--card-bg);
+  border: none;
+  border-radius: 6px;
 }
 
 .signup-link {
@@ -32,7 +36,7 @@
 }
 
 .signup-link a {
-  color: var(--primary-color);
+  color: var(--text-color);
   text-decoration: underline;
 }
 

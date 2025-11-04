@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/vaibh/Desktop/blog-app/src/app/page.js"],"sourcesContent":["import Link from 'next/link';\r\n\r\nexport default function Home() {\r\n  return (\r\n    <div className=\"container\">\r\n      <header>\r\n        <nav>\r\n          <div className=\"nav-links\">\r\n            <Link href=\"/\">Home</Link>\r\n            <Link href=\"/signup\">Sign Up</Link>\r\n            <Link href=\"/login\">Login</Link>\r\n          </div>\r\n        </nav>\r\n      </header>\r\n      <main>\r\n        <h1>Welcome to the Blog App</h1>\r\n        <p>Please sign up or login to continue.</p>\r\n      </main>\r\n    </div>\r\n  );\r\n}"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;;0BACb,8OAAC;0BACC,cAAA,8OAAC;8BACC,cAAA,8OAAC;wBAAI,WAAU;;0CACb,8OAAC,0LAAI;gCAAC,MAAK;0CAAI;;;;;;0CACf,8OAAC,0LAAI;gCAAC,MAAK;0CAAU;;;;;;0CACrB,8OAAC,0LAAI;gCAAC,MAAK;0CAAS;;;;;;;;;;;;;;;;;;;;;;0BAI1B,8OAAC;;kCACC,8OAAC;kCAAG;;;;;;kCACJ,8OAAC;kCAAE;;;;;;;;;;;;;;;;;;AAIX","debugId":null}}]
-}

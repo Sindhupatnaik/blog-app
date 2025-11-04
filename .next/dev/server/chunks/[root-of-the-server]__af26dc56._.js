@@ -86,7 +86,16 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken
 ;
 ;
 ;
-const prisma = new __TURBOPACK__imported__module__$5b$externals$5d2f40$prisma$2f$client__$5b$external$5d$__$2840$prisma$2f$client$2c$__cjs$29$__["PrismaClient"]();
+// Use a single PrismaClient instance
+let prisma;
+if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+;
+else {
+    if (!/*TURBOPACK member replacement*/ __turbopack_context__.g.prisma) {
+        /*TURBOPACK member replacement*/ __turbopack_context__.g.prisma = new __TURBOPACK__imported__module__$5b$externals$5d2f40$prisma$2f$client__$5b$external$5d$__$2840$prisma$2f$client$2c$__cjs$29$__["PrismaClient"]();
+    }
+    prisma = /*TURBOPACK member replacement*/ __turbopack_context__.g.prisma;
+}
 async function POST(request) {
     try {
         const { name, email, password } = await request.json();

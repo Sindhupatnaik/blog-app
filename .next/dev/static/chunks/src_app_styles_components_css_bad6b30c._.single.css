@@ -5,7 +5,7 @@
 }
 
 .nav-brand a {
-  color: var(--primary-color);
+  color: var(--text-color);
   text-decoration: none;
 }
 
@@ -32,11 +32,11 @@ nav {
 .nav-links a {
   color: var(--text-color);
   text-decoration: none;
-  transition: color .2s;
+  transition: opacity .15s;
 }
 
 .nav-links a:hover {
-  color: var(--primary-color);
+  opacity: .85;
 }
 
 .theme-toggle {
@@ -50,7 +50,7 @@ nav {
 }
 
 .theme-toggle:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--card-bg);
 }
 
 .username {
@@ -59,17 +59,17 @@ nav {
 }
 
 .nav-button {
-  background-color: var(--primary-color);
-  color: #fff;
+  background-color: var(--text-color);
+  color: var(--card-bg);
   cursor: pointer;
   border: none;
   border-radius: 4px;
   padding: .5rem 1rem;
-  transition: background-color .2s;
+  transition: opacity .15s;
 }
 
 .nav-button:hover {
-  background-color: #1557b0;
+  opacity: .9;
 }
 
 .footer {
