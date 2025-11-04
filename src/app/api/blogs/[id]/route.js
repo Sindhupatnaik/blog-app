@@ -1,151 +1,183 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-import jwt from 'jsonwebtoken';
+import pool from '../../../../../db/connection.js';
+import { verifyToken } from '../../auth/verify/route.js';
+import { ensureDatabaseInitialized } from '../../../../../lib/db-init.js';
 
-const prisma = new PrismaClient();
-
-function getUserIdFromRequest(request) {
-  const userIdHeader = request.headers.get('user-id');
-  if (userIdHeader) return parseInt(userIdHeader);
-  const auth = request.headers.get('authorization') || request.headers.get('Authorization');
-  if (!auth) return null;
-  const parts = auth.split(' ');
-  const token = parts.length === 2 && parts[0] === 'Bearer' ? parts[1] : parts[0];
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    return decoded.userId;
-  } catch (e) {
-    return null;
-  }
-}
-
-// GET single blog
+// Get single blog from database
 export async function GET(request, { params }) {
+  await ensureDatabaseInitialized();
+  const connection = await pool.getConnection();
   try {
-    const blog = await prisma.blog.findUnique({
-      where: {
-        id: parseInt(params.id)
-      },
-      include: {
-        author: {
-          select: {
-            id: true,
-            name: true,
-            email: true
-          }
-        }
-      }
-    });
+    const { id } = await params;
+    const [blogs] = await connection.query(
+      'SELECT * FROM blogs WHERE id = ?',
+      [id]
+    );
 
-    if (!blog) {
+    if (blogs.length === 0) {
       return NextResponse.json(
         { error: 'Blog not found' },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(blog);
+    console.log(`[BLOGS] Retrieved blog: ${id}`);
+    return NextResponse.json(blogs[0]);
   } catch (error) {
-    console.error('Error fetching blog:', error);
+    console.error('[BLOGS] Error fetching blog:', error);
     return NextResponse.json(
-      { error: 'Error fetching blog' },
+      { error: 'Failed to fetch blog' },
       { status: 500 }
     );
+  } finally {
+    connection.release();
   }
 }
 
-// PUT update blog
+// Update blog - update in database only
 export async function PUT(request, { params }) {
+  await ensureDatabaseInitialized();
+  const connection = await pool.getConnection();
   try {
+    // Verify token
+    const authResult = await verifyToken(request);
+    if (authResult.error) {
+      return NextResponse.json(
+        { error: authResult.error },
+        { status: 401 }
+      );
+    }
+
+    const { id } = await params;
     const { title, content } = await request.json();
-    const userId = getUserIdFromRequest(request);
 
-    const blog = await prisma.blog.findUnique({
-      where: {
-        id: parseInt(params.id)
-      }
-    });
-
-    if (!blog) {
+    // First, get the blog from database to check ownership
+    const [blogs] = await connection.query('SELECT * FROM blogs WHERE id = ?', [id]);
+    
+    if (blogs.length === 0) {
       return NextResponse.json(
         { error: 'Blog not found' },
         { status: 404 }
       );
     }
 
-    if (blog.authorId !== parseInt(userId)) {
+    const blog = blogs[0];
+
+    // Check if user owns this blog
+    if (blog.authorId !== authResult.userId) {
       return NextResponse.json(
-        { error: 'Unauthorized' },
+        { error: 'Unauthorized - you can only edit your own blogs' },
         { status: 403 }
       );
     }
 
-    const updatedBlog = await prisma.blog.update({
-      where: {
-        id: parseInt(params.id)
-      },
-      data: {
-        title,
-        content
-      },
-      include: {
-        author: {
-          select: {
-            id: true,
-            name: true,
-            email: true
-          }
-        }
-      }
-    });
+    // Prepare update fields
+    const updates = [];
+    const values = [];
 
-    return NextResponse.json(updatedBlog);
+    if (title !== undefined) {
+      if (title.trim().length === 0) {
+        return NextResponse.json(
+          { error: 'Title cannot be empty' },
+          { status: 400 }
+        );
+      }
+      updates.push('title = ?');
+      values.push(title.trim());
+    }
+
+    if (content !== undefined) {
+      if (content.trim().length === 0) {
+        return NextResponse.json(
+          { error: 'Content cannot be empty' },
+          { status: 400 }
+        );
+      }
+      updates.push('content = ?');
+      values.push(content.trim());
+    }
+
+    if (updates.length === 0) {
+      return NextResponse.json(
+        { error: 'No fields to update' },
+        { status: 400 }
+      );
+    }
+
+    updates.push('updatedAt = ?');
+    values.push(new Date().toISOString().slice(0, 19).replace('T', ' '));
+    values.push(id);
+
+    // Update blog in database
+    await connection.query(
+      `UPDATE blogs SET ${updates.join(', ')} WHERE id = ?`,
+      values
+    );
+
+    // Retrieve updated blog from database
+    const [updatedBlog] = await connection.query('SELECT * FROM blogs WHERE id = ?', [id]);
+    
+    console.log(`[BLOGS] Updated blog in database: ${id}`);
+    return NextResponse.json(updatedBlog[0]);
   } catch (error) {
-    console.error('Error updating blog:', error);
+    console.error('[BLOGS] Error updating blog:', error);
     return NextResponse.json(
-      { error: 'Error updating blog' },
+      { error: 'Failed to update blog' },
       { status: 500 }
     );
+  } finally {
+    connection.release();
   }
 }
 
-// DELETE blog
+// Delete blog - delete from database only
 export async function DELETE(request, { params }) {
+  await ensureDatabaseInitialized();
+  const connection = await pool.getConnection();
   try {
-    const userId = getUserIdFromRequest(request);
+    // Verify token
+    const authResult = await verifyToken(request);
+    if (authResult.error) {
+      return NextResponse.json(
+        { error: authResult.error },
+        { status: 401 }
+      );
+    }
 
-    const blog = await prisma.blog.findUnique({
-      where: {
-        id: parseInt(params.id)
-      }
-    });
+    const { id } = await params;
 
-    if (!blog) {
+    // First, get the blog from database to check ownership
+    const [blogs] = await connection.query('SELECT * FROM blogs WHERE id = ?', [id]);
+    
+    if (blogs.length === 0) {
       return NextResponse.json(
         { error: 'Blog not found' },
         { status: 404 }
       );
     }
 
-    if (blog.authorId !== parseInt(userId)) {
+    const blog = blogs[0];
+
+    // Check if user owns this blog
+    if (blog.authorId !== authResult.userId) {
       return NextResponse.json(
-        { error: 'Unauthorized' },
+        { error: 'Unauthorized - you can only delete your own blogs' },
         { status: 403 }
       );
     }
 
-    await prisma.blog.delete({
-      where: {
-        id: parseInt(params.id)
-      }
-    });
+    // Delete blog from database
+    await connection.query('DELETE FROM blogs WHERE id = ?', [id]);
 
+    console.log(`[BLOGS] Deleted blog from database: ${id}`);
     return NextResponse.json({ message: 'Blog deleted successfully' });
   } catch (error) {
-    console.error('Error deleting blog:', error);
+    console.error('[BLOGS] Error deleting blog:', error);
     return NextResponse.json(
-      { error: 'Error deleting blog' },
+      { error: 'Failed to delete blog' },
       { status: 500 }
     );
+  } finally {
+    connection.release();
   }
 }

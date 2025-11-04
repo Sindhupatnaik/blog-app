@@ -2,19 +2,23 @@
 export default {
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
-    './app/**/*.{js,jsx,ts,tsx}',
-    './pages/**/*.{js,jsx,ts,tsx}'
+    './src/app/**/*.{js,jsx,ts,tsx}',
+    './src/components/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
     extend: {
-      colors: {
-        'soft-rose': '#fff1f2'
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
-      fontFamily: {
-        serif: ['Georgia', 'ui-serif', 'serif'],
-        inter: ['Inter', 'ui-sans-serif', 'system-ui']
-      }
-    }
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(-10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 }
+

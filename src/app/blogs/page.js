@@ -1,59 +1,93 @@
-'use client';
+'use client'
 
-import { useEffect, useState } from 'react';
-import styles from './blogs.module.css';
-import Link from 'next/link';
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useAuth } from '../context/AuthContext'
 
-export default function BlogsPage(){
-  const [blogs, setBlogs] = useState([]);
+export default function BlogsPage() {
+  const [blogs, setBlogs] = useState([])
+  const [loading, setLoading] = useState(true)
+  const { user } = useAuth()
 
-  useEffect(()=>{
-    // Sample blogs data
-    const sampleBlogs = [
-      {
-        id: 1,
-        title: "The Future of Web Development: What's Next in 2026",
-        content: "As we approach 2026, the landscape of web development continues to evolve at an unprecedented pace. From WebAssembly becoming mainstream to AI-powered development tools, we're seeing a radical transformation in how we build for the web. Edge computing and serverless architectures are becoming the new normal, while frameworks like Next.js and Remix are pushing the boundaries of what's possible on the web platform.",
-        author: { name: "Sarah Chen" },
-        createdAt: "2025-10-15T10:00:00Z"
-      },
-      {
-        id: 2,
-        title: "Mastering Modern CSS Techniques",
-        content: "CSS has come a long way from being just a styling language. With features like CSS Grid, Container Queries, and CSS Custom Properties, we now have powerful tools to create responsive and maintainable layouts. This post explores advanced CSS techniques that will elevate your web design skills and help you create more elegant solutions.",
-        author: { name: "Alex Rodriguez" },
-        createdAt: "2025-10-20T15:30:00Z"
-      },
-      {
-        id: 3,
-        title: "Building Sustainable and Scalable Applications",
-        content: "Scalability isn't just about handling more users – it's about creating sustainable systems that can grow and adapt over time. This guide covers essential principles of building scalable applications, from choosing the right architecture to implementing efficient caching strategies and optimizing database queries.",
-        author: { name: "Maya Patel" },
-        createdAt: "2025-10-25T09:15:00Z"
-      },
-      {
-        id: 4,
-        title: "The Impact of AI on Software Development",
-        content: "Artificial Intelligence is revolutionizing how we write and maintain code. From intelligent code completion to automated testing and bug detection, AI tools are becoming an integral part of the modern developer's toolkit. Learn how to leverage these tools effectively while understanding their limitations and potential pitfalls.",
-        author: { name: "James Wilson" },
-        createdAt: "2025-11-01T14:45:00Z"
-      }
-    ];
-    setBlogs(sampleBlogs);
-  },[]);
+  useEffect(() => {
+    fetchBlogs()
+  }, [])
+
+  const fetchBlogs = async () => {
+    try {
+      const res = await fetch('/api/blogs')
+      const data = await res.json()
+      setBlogs(data)
+      setLoading(false)
+    } catch (error) {
+      console.error('Error fetching blogs:', error)
+      setLoading(false)
+    }
+  }
 
   return (
-    <div className={styles.wrap}>
-      <h2>All Blogs</h2>
-      <div className={styles.grid}>
-        {blogs.map(b=> (
-          <div className={styles.card} key={b.id}>
-            <h3 className={styles.title}><Link href={`/blog/${b.id}`}>{b.title}</Link></h3>
-            <p className={styles.snippet}>{b.content.length>200?b.content.substring(0,200)+'...':b.content}</p>
-            <div className={styles.meta}>By {b.author?.name || 'Unknown'} • {new Date(b.createdAt).toLocaleDateString()}</div>
-          </div>
-        ))}
+    <div className="container mx-auto px-4 py-12">
+      <div className="flex justify-between items-center mb-12">
+        <h1 className="text-5xl font-bold text-black">All Blogs</h1>
+        {user && (
+          <Link
+            href="/create"
+            className="bg-black text-white px-8 py-3 rounded-full hover:bg-black/90 transition-colors font-semibold"
+          >
+            Write New Blog
+          </Link>
+        )}
       </div>
+
+      {loading ? (
+        <div className="text-center py-20">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-black"></div>
+          <p className="text-black/60 mt-4">Loading blogs...</p>
+        </div>
+      ) : blogs.length === 0 ? (
+        <div className="text-center py-20 border border-black/10 rounded-2xl">
+          <p className="text-black/60 text-xl mb-4">No blogs yet.</p>
+          {user ? (
+            <Link
+              href="/create"
+              className="text-black hover:text-black/80 transition-colors underline"
+            >
+              Write the first blog!
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className="text-black hover:text-black/80 transition-colors underline"
+            >
+              Login to write blogs
+            </Link>
+          )}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogs.map((blog) => (
+            <Link
+              key={blog.id}
+              href={`/blogs/${blog.id}`}
+              className="group border border-black/10 rounded-2xl p-6 hover-lift hover:border-black/20 transition-all"
+            >
+              <div className="h-px w-16 bg-black mb-4"></div>
+              <h2 className="text-2xl font-bold text-black mb-3 group-hover:text-black/80 transition-colors">
+                {blog.title}
+              </h2>
+              <p className="text-black/60 mb-6 line-clamp-4 leading-relaxed">
+                {blog.content.substring(0, 200)}...
+              </p>
+              <div className="flex items-center justify-between text-sm text-black/50 pt-4 border-t border-black/10">
+                <span>{blog.authorName}</span>
+                <span>{new Date(blog.createdAt).toLocaleDateString()}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
-  );
+  )
 }
+
+

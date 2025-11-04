@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/vaibh/Desktop/blog-app/src/app/signup/signup.module.css"],"sourcesContent":[".container {\r\n  max-width: 480px;\r\n  margin: 3rem auto;\r\n  background: var(--card-bg);\r\n  padding: 2rem;\r\n  border-radius: 8px;\r\n  box-shadow: 0 6px 18px rgba(0,0,0,0.06);\r\n}\r\n.title { text-align:center; margin-bottom:1rem; color:var(--text-color); }\r\n.form { display:flex; flex-direction:column; gap:0.75rem }\r\n.input { padding:0.65rem; border-radius:6px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-color); }\r\n.button { margin-top:0.5rem; padding:0.75rem; background:var(--primary-color); color:white; border:none; border-radius:6px; cursor:pointer }\r\n.meta{ text-align:center; margin-top:1rem }\r\n.error{ color:var(--error-color); text-align:center }\r\n.success{ color:var(--success-color); text-align:center }\r\n"],"names":[],"mappings":"AAAA;;;;;;;;;AAQA;;;;;;AACA;;;;;;AACA;;;;;;;;AACA;;;;;;;;;;AACA;;;;;AACA;;;;;AACA","debugId":null}}]
-}

@@ -2,7 +2,7 @@
 
 import DashboardSidebar from '../../components/DashboardSidebar'
 
-export default function DashboardLayout({ children }) {
+export default function CreateLayout({ children }) {
   return (
     <div className="flex min-h-screen bg-white">
       <DashboardSidebar />

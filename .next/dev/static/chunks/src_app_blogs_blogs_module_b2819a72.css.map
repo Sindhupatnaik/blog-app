@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/vaibh/Desktop/blog-app/src/app/blogs/blogs.module.css"],"sourcesContent":[".wrap { max-width: 1100px; margin:2rem auto }\r\n.grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap:1rem }\r\n.card { background:var(--card-bg); padding:1rem; border-radius:8px }\r\n.title { font-size:1.25rem; color:var(--text-color) }\r\n.snippet { color:var(--text-color); opacity:0.85 }\r\n.meta { margin-top:0.5rem; color:var(--text-color); opacity:0.7 }\r\n"],"names":[],"mappings":"AAAA;;;;;AACA;;;;;;AACA;;;;;;AACA;;;;;AACA;;;;;AACA","debugId":null}}]
-}

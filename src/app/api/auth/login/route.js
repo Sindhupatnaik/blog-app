@@ -1,57 +1,67 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import pool from '../../../../../db/connection.js';
+import { ensureDatabaseInitialized } from '../../../../../lib/db-init.js';
 
-const prisma = new PrismaClient();
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 
 export async function POST(request) {
+  await ensureDatabaseInitialized();
+  const connection = await pool.getConnection();
   try {
     const { email, password } = await request.json();
 
-    // Find user
-    const user = await prisma.user.findUnique({
-      where: { email }
-    });
-
-    if (!user) {
+    if (!email || !password) {
       return NextResponse.json(
-        { error: 'User not found' },
-        { status: 404 }
+        { error: 'Email and password are required' },
+        { status: 400 }
       );
     }
 
-    // Verify password
-    const isValidPassword = await bcrypt.compare(password, user.password);
+    // Find user by email from database
+    const [users] = await connection.query(
+      'SELECT id, username, email, password FROM users WHERE email = ?',
+      [email]
+    );
 
-    if (!isValidPassword) {
+    if (users.length === 0) {
       return NextResponse.json(
-        { error: 'Invalid password' },
+        { error: 'Invalid email or password' },
         { status: 401 }
       );
     }
 
-    // Generate JWT token
-    const token = jwt.sign(
-      { userId: user.id },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
+    const user = users[0];
+    const isValidPassword = await bcrypt.compare(password, user.password);
 
-    // Return user data (excluding password) and token
+    if (!isValidPassword) {
+      return NextResponse.json(
+        { error: 'Invalid email or password' },
+        { status: 401 }
+      );
+    }
+
+    // Generate token
+    const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
+
+    console.log(`[AUTH] User logged in: ${user.username} (${user.id})`);
+
     return NextResponse.json({
+      token,
       user: {
         id: user.id,
-        name: user.name,
+        username: user.username,
         email: user.email
-      },
-      token
+      }
     });
   } catch (error) {
-    console.error('Login error:', error);
+    console.error('[AUTH] Login error:', error);
     return NextResponse.json(
-      { error: 'Error during login' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
+  } finally {
+    connection.release();
   }
 }

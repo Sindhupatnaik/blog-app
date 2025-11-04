@@ -1,87 +1,99 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-import jwt from 'jsonwebtoken';
+import pool from '../../../../db/connection.js';
+import { verifyToken } from '../auth/verify/route.js';
+import { ensureDatabaseInitialized } from '../../../../lib/db-init.js';
 
-const prisma = new PrismaClient();
-
-function getUserIdFromRequest(request) {
-  // support user-id header (from middleware) or Authorization: Bearer <token>
-  const userIdHeader = request.headers.get('user-id');
-  if (userIdHeader) return parseInt(userIdHeader);
-
-  const auth = request.headers.get('authorization') || request.headers.get('Authorization');
-  if (!auth) return null;
-  const parts = auth.split(' ');
-  const token = parts.length === 2 && parts[0] === 'Bearer' ? parts[1] : parts[0];
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    return decoded.userId;
-  } catch (e) {
-    return null;
-  }
-}
-
-// GET all blogs
+// Get all blogs from database
 export async function GET() {
+  await ensureDatabaseInitialized();
+  const connection = await pool.getConnection();
   try {
-    const blogs = await prisma.blog.findMany({
-      include: {
-        author: {
-          select: {
-            id: true,
-            name: true,
-            email: true
-          }
-        }
-      },
-      orderBy: {
-        createdAt: 'desc'
-      }
-    });
-
+    const [blogs] = await connection.query(
+      'SELECT * FROM blogs ORDER BY createdAt DESC'
+    );
+    console.log(`[BLOGS] Retrieved ${blogs.length} blogs from database`);
     return NextResponse.json(blogs);
   } catch (error) {
-    console.error('Error fetching blogs:', error);
+    console.error('[BLOGS] Error fetching blogs:', error);
     return NextResponse.json(
-      { error: 'Error fetching blogs' },
+      { error: 'Failed to fetch blogs' },
       { status: 500 }
     );
+  } finally {
+    connection.release();
   }
 }
 
-// POST new blog
+// Create blog - save to database only
 export async function POST(request) {
+  await ensureDatabaseInitialized();
+  const connection = await pool.getConnection();
   try {
-    const { title, content } = await request.json();
-    const userId = getUserIdFromRequest(request);
-
-    if (!userId) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    // Verify token
+    const authResult = await verifyToken(request);
+    if (authResult.error) {
+      return NextResponse.json(
+        { error: authResult.error },
+        { status: 401 }
+      );
     }
 
-    const blog = await prisma.blog.create({
-      data: {
-        title,
-        content,
-        authorId: parseInt(userId)
-      },
-      include: {
-        author: {
-          select: {
-            id: true,
-            name: true,
-            email: true
-          }
-        }
-      }
-    });
+    const { title, content, authorId, authorName } = await request.json();
 
-    return NextResponse.json(blog);
+    if (!title || !content || !authorId) {
+      return NextResponse.json(
+        { error: 'Title, content, and authorId are required' },
+        { status: 400 }
+      );
+    }
+
+    if (title.trim().length === 0 || content.trim().length === 0) {
+      return NextResponse.json(
+        { error: 'Title and content cannot be empty' },
+        { status: 400 }
+      );
+    }
+
+    // Verify that the authorId matches the logged-in user
+    if (authResult.userId !== authorId) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 403 }
+      );
+    }
+
+    const blogId = Date.now().toString() + Math.random().toString(36).substr(2, 9);
+    const createdAt = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    const updatedAt = createdAt;
+
+    // Insert new blog into database
+    await connection.query(
+      'INSERT INTO blogs (id, title, content, authorId, authorName, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [blogId, title.trim(), content.trim(), authorId, authorName || 'Anonymous', createdAt, updatedAt]
+    );
+
+    // Verify insertion and retrieve from database
+    const [newBlog] = await connection.query('SELECT * FROM blogs WHERE id = ?', [blogId]);
+    if (newBlog.length === 0) {
+      throw new Error('Failed to create blog');
+    }
+
+    console.log(`[BLOGS] Created blog in database: ${title} (${blogId}) by ${authorName}`);
+    
+    return NextResponse.json(newBlog[0], { status: 201 });
   } catch (error) {
-    console.error('Error creating blog:', error);
+    console.error('[BLOGS] Error creating blog:', error);
+    if (error.code === 'ER_NO_REFERENCED_ROW_2') {
+      return NextResponse.json(
+        { error: 'Invalid author ID' },
+        { status: 400 }
+      );
+    }
     return NextResponse.json(
-      { error: 'Error creating blog' },
+      { error: 'Failed to create blog' },
       { status: 500 }
     );
+  } finally {
+    connection.release();
   }
 }
